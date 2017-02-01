@@ -3,7 +3,10 @@ FROM ubuntu:14.04
 
 LABEL MAINTAINER <Author name and email address>
 
-RUN apt-get update -y && apt-get upgrade
+#	resynchronize the package index files
+#	install the newest versions of all packages currently installed
+#	packages no longer required are removed
+RUN apt-get -qy update && apt-get -qy dist-upgrade && apt-get -qy autoremove 
 
 # Create a time and date stamp of this build
 RUN mkdir -p /version; \
